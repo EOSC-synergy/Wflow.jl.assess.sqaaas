@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/Deltares/Wflow.jl:
+      branch: master
+      repo: https://github.com/Deltares/Wflow.jl
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/Deltares/Wflow.jl git:
+        commands:
+        - /usr/bin/env sh .sqa/script.lovely-bronze-gharial.sh
+        container: qc.acc_randy-bronze-squirt
+  QC.Doc:
+    repos:
+      github.com/Deltares/Wflow.jl find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.jumpy-wheat-turtle.sh
+        container: qc.doc_squeaky-razzmatazz-corgi
+      github.com/Deltares/Wflow.jl git:
+        commands:
+        - /usr/bin/env sh .sqa/script.pokey-corn-dragon.sh
+        container: qc.doc_scummy-red-balinese
+      github.com/Deltares/Wflow.jl markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.scanty-zucchini-rottweiler.sh
+        container: qc.doc_chewy-yellow-retriever
+  QC.Lic:
+    repos:
+      github.com/Deltares/Wflow.jl licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.sickly-cyan-fossa.sh
+        container: qc.lic_chummy-thistle-tzu
+  QC.Sty:
+    repos:
+      github.com/Deltares/Wflow.jl hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.tasty-teal-tarsier.sh
+        container: qc.sty_crabby-auburn-manatee
+      github.com/Deltares/Wflow.jl jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.muggy-chocolate-badger.sh
+        container: qc.sty_crappy-scarlet-mau
+  QC.Ver:
+    repos:
+      github.com/Deltares/Wflow.jl get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.trippy-lime-orangutan.sh
+        container: qc.ver_shaggy-silver-catfish
+timeout: 5400
